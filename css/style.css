@@ -1,0 +1,282 @@
+	
+/*******************************************************************************************
+	ELEMENTOS DEL CUADRO DE INFO DE RETROSPECTIVA Y PROSPECTIVA
+*******************************************************************************************/
+.contenido {
+	max-width: 900px; /*Esta sección tendrá un ancho de maximo 900px */
+	margin: 20px auto;
+	position: relative;
+	overflow-x: hidden;/* El contenido de los elementos contenidos en este elemento
+						  que sobrepasen los límites de este horizontalmente, se ocultan */
+}
+
+.suceso {
+	/*background-color: rgba(0, 0, 0, 0.4);*/
+	background-color: rgb(131,168,19);
+	max-width: 900px;
+}
+
+.suceso-fecha {
+	margin: 0px;
+	padding: 0px 0px 0px 0px;
+	width: 220px;
+	display: inline-block;
+	height: 80px;
+	line-height: 80px;
+	color: #222222;
+}
+
+.suceso-contenido {
+	margin: 0px;
+	width: calc(100% - 225px);
+	display: inline-block;
+}
+
+.suceso-titulo {
+	padding: 0px 0px 0px 20px;
+	width: 100%;
+	height: 80px;
+	position: relative;
+	display: inline-block;
+	background-color: rgb(131,168,19);
+	color: #DDDDDD;
+	line-height: 80px;
+}
+
+.suceso-info {
+	position: absolute;
+	display: none;
+	font-size: 14px;
+	line-height: 22px;
+	text-align: justify;
+	}
+
+.suceso:hover .suceso-fecha {
+	background-color: #DDDDDD;
+	-webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+	padding: 0px 0px 0px 0px; /* Transicion al pasar el cursor por encima de las fechas */
+}
+
+.suceso:hover .suceso-titulo {
+	top:0px;
+	position: absolute;
+	width: calc(100% - 225px);
+	text-align: center;
+}
+
+.suceso:hover .suceso-info {
+	padding: 20px 20px;
+	z-index: 9900;
+	display: inline-block;
+	width: calc(100% - 225px);
+	background-color: #222222;
+	height: 560px;
+	top: 80px;
+}
+
+.suceso:hover .suceso-imagen {
+	width: 60%;
+	display: inline-block;
+}
+
+.suceso:hover .suceso-imagen img {
+	width: 100%;
+}
+
+.suceso:hover .suceso-texto {
+	margin-left: 10px;
+	width: calc(38% - 5px);
+	display: inline-block;
+	vertical-align: top;
+	color: #DDDDDD;
+	text-align: justify;
+}
+     
+/**************************************************************************************************************************
+ Cuando la pantalla es menor que 480px
+**************************************************************************************************************************/
+	@media screen and (max-width: 480px) {
+ /*** BODY ***/
+        body {
+            font-size: 14px;
+        }
+        
+		.wrapper {
+            padding: 10px 15px;
+        }
+                
+            .wrapper .title {
+                font-size: 0.9em;
+                width: 18em;
+                height: 2.5em;
+                top: -2.5em;
+                line-height: 2.5em;
+                margin-bottom: -2.5em;
+                margin-left: -9em;
+                padding-top: 0.5em;
+            }
+                    
+                .wrapper .title:before, .wrapper .title:after {
+                    height: 15px;
+                    bottom: -15px;
+                    background-size: 100% 100%;
+                }
+        
+        #header-wrapper > * {
+            padding: 6em 2em 22em 2em;
+        }
+		
+/*** NAV ***/
+		
+		/* Ajustar el menú de navegación */
+        #nav {
+            padding: 90px 0px 0px 0px;
+	        }|
+			
+		#nav ul
+		{
+			border-radius: 15px; /* Se cambia el radio de los bordes de la caja contenedora */
+		}
+		
+       	#nav > ul > li {
+            display: block; /* Mostrar los elementos del menú en forma de lista */
+            padding: 0;
+		    }
+	
+			#nav > ul > li > a,
+			#nav > ul > li > span
+			{
+				display: block;
+				padding: 0px;
+				letter-spacing: 1px;
+				font-size: 12px;
+			}
+		
+		#textos
+		{
+			font-size:18px;
+			padding: 150px 0px 150px 0px;
+		}
+		
+/*** HEADER ***/
+	.contenido {
+		clear: both;
+	}
+	
+	.contenedor-scroll {
+		height: auto;
+		overflow-y: auto;
+		text-align: center;
+		margin: 0px 0px 50px 0px;
+		max-width: 97%;
+		
+	}
+		
+		.seccion-eventos {
+		width: auto;
+		float:none;
+		margin: 10px;
+		color: #FFFFFF;
+		height: auto;
+	}
+
+	.seccion-eventos h2 {
+		text-align: center;
+		margin: 0px auto 20px;
+	}
+	
+	.tabla-eventos {
+		max-width: 480px;
+		margin: 0px auto;
+		padding: none;
+	}
+	
+	.suceso {
+		padding-bottom: 10px;
+		margin-bottom: 15px;
+		border-radius: 30px;
+	}
+	
+	.suceso-fecha {
+		padding: 0px 30px;
+		width: 100%;
+		display: block;
+		color: #000000;
+		text-align: center;
+		font-weight: bold;
+	}
+
+	.suceso-contenido {
+		margin: 0px 30px 10px 30px;
+		width: auto;
+		display: block;
+	}
+
+	.suceso-titulo {
+		padding: 10px 20px;
+		width: auto;
+		height: auto;
+		display: block;
+		line-height: 30px;
+		text-align: center;
+	}
+
+	.suceso-info {
+		padding: 0px 30px 20px 30px;
+		position: static;
+		display: block;
+		background-color: #222222;
+	}
+
+	.suceso-texto {
+		margin-top: 10px;
+		display: block;
+		color: #DDDDDD;
+	}
+	
+	.suceso-imagen img {
+		margin: 0px auto;
+		width: 100%;
+	}
+	
+	.suceso:hover .suceso-fecha {
+		background-color: transparent;
+		-webkit-transition-duration: 0s; /* Safari */
+		transition-duration: 0s;
+		padding: 0px 0px 0px 0px;
+	}
+
+	.suceso:hover .suceso-titulo {
+		position: static;
+		width: auto;
+		text-align: left;
+		text-align: center;
+	}
+
+	.suceso:hover .suceso-info {
+		padding: 0px 30px 20px 30px;
+		display: block;
+		width: auto;
+		height: auto;
+	}
+
+	.suceso:hover .suceso-imagen {
+		width: auto;
+		display: block;
+		height:auto;
+	}
+
+	.suceso:hover .suceso-imagen img {
+		width: 100%;
+	}
+
+	.suceso:hover .suceso-texto {
+		margin-left: 0px;
+		margin-top: 10px;
+		width: auto;
+		display: block;
+		color: #DDDDDD;
+	}
+	}
+

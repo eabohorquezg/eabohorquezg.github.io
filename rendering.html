@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+
+    <title>Edwin Bohorquez</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="assets/js/hover.zoom.js"></script>
+    <script src="assets/js/hover.zoom.conf.js"></script> 
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->  
+  </head>
+ 
+  <body>
+
+    <!-- Static navbar -->
+    <div class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>         
+          <a class="navbar-brand" href="rendering.html">ALGORITMO Z-BUFFER</a>      	
+        </div>
+
+      </div>
+    </div>
+ 
+	<!-- +++++ Welcome Section +++++ -->
+	<br/><br/>	
+	    <div class="container">
+			<div class="row">				
+					<p style="text-align:justify"><b>Z-buffering</b> es la parte de la memoria de una tarjeta grafica (GPU) encargada de gestionar las coordenadas de profundidad de las imágenes en los gráficos en tres dimensiones, normalmente calculadas por hardware y algunas veces por software.</p>
+					<center>												
+					<img src="assets/img/gpu.png" alt="GPU">														
+						<caption>						
+							<br/><br/>
+							<p>Figura 1: Tarjeta Grafica</p>
+						</caption>
+					</center>	
+					<p style="text-align:justify">Cuando un objeto es dibujado por una tarjeta gráfica 3D, la profundidad del píxel generado (coordenada z) se almacena en un búfer de datos (el z-buffer). Este búfer se suele distribuir como un array de 2 dimensiones (x-y) con un elemento por cada pixel de la pantalla. Si algún otro objeto de la escena se tiene que renderizar en el mismo pixel, la tarjeta gráfica compara las dos profundidades y elige el más cercano al observador. La profundidad elegida es entonces salvada en el z-buffer, reemplazando a la antigua.</p>						
+					<p style="text-align:justify"><b>El algoritmo de z-buffer</b> está implementado en la mayoría de las tarjetas gráficas y forma parte de las técnicas utilizadas por las bibliotecas gráficas (OpenGL, DirectX).<p>
+					<center>												
+					<img src="assets/img/algoritmo.png" alt="Algoritmo">														
+						<caption>						
+							<br/><br/>
+							<p>Figura 2: Algoritmo z-buffer</p>
+						</caption>
+					</center>	
+					<p style="text-align:justify">A continuacion podemos ver un ejemplo en el cual se aplica z-buffer:</p>
+					<center>												
+					<img src="assets/img/matriz.png" alt="matriz">														
+						<caption>						
+							<br/><br/>
+							<p>Figura 3: Matriz con valores de Z de la superficie visible</p>
+						</caption>
+					</center>	
+					<p style="text-align:justify">Como se puede observar en la imagen se tiene una matriz que contiene los valores Z de la superficie visible para cada pixel. Luego se recorren las lineas de barrido para calcular los Z. Como el triangulo pertenece a un plano es facil calcular Z, dado el X e Y.<br/>						
+					Una vez calculado el valor de Z de un plano en un pixel, se puede calcular facilmente el valor de z en el punto siguiente de la linea de barrido dado que el z-buffer vacío tiene un cero asociado a cada celda (y pixel). Luego, se recorre un primer triángulo paralelo al plano z. Por tanto, todos las celdas tienen el mismo valor.<p>	
+					<center>												
+					<img src="assets/img/triangulo.png" alt="triangulo">														
+						<caption>						
+							<br/><br/>
+							<p>Figura 4: Triangulo paralelo al plano Z</p>
+						</caption>
+					</center>
+					<p style="text-align:justify">Luego, se recorre un segundo triángulo. Se compara esos valores con los ya existentes. Si en el triángulo hay valores mayores que los equivalentes en el z-buffer, entonces se ingresan dichos valores al z-buffer.</p>
+					<center>												
+					<img src="assets/img/triangulo2.png" alt="triangulo">														
+						<caption>						
+							<br/><br/>
+							<p>Figura 5: Triangulo paralelo al plano Z</p>
+						</caption>
+					</center>
+					<p style="text-align:justify">A continuacion se presentan algunos ejemplos de z-buffer:<p>
+					<h1>Ventajas</h1>										
+					<ul>
+						<li>
+							<p style="text-align:justify">
+							Puede utilizarse para cualquier tipo de objeto si se puede determinar el valor de z y la iluminación en cada punto de la proyección; observar que también es adecuado para objetos con superficies curvas ya que encuentra
+							la superficie más cercana basándose en un test punto por punto.
+							</p>
+						</li>
+						<li>
+							<p style="text-align:justify">
+							Los polígonos no tienen que compararse en un orden predeterminado: no es necesario un ordenamiento en z.
+							</p>
+						</li>
+						<li>
+							<p style="text-align:justify">
+							No se requiere algoritmo de intersección.
+							</p>
+						</li>
+						<li>
+							<p style="text-align:justify">
+							Sólo considera un polígono a la vez aunque la oclusión es un problema global.
+							</p>							
+						</li>
+						<li>
+							<p style="text-align:justify">
+							Fácil de implementar. La simplicidad también se traslada al hardware y se usa en la mayoría de las estaciones de trabajo 3-D y las tarjetas gráficas, aún las más baratas.
+							</p>							
+						</li>
+						<li>
+							<p style="text-align:justify">
+							Los requerimientos de memoria se pueden superar si la imagen se convierte por zonas.
+							</p>														
+						</li>											
+					</ul>
+					<h1>Desventajas</h1>										
+					<ul>
+						<li>
+							<p style="text-align:justify">
+							Puede pintar el mismo pixel varias veces y esto es caro.
+							</p>
+						</li>
+						<li>
+							<p style="text-align:justify">
+							Tiene un problema de precisión debido al acortamiento en perspectiva.
+							</p>
+						</li>
+						<li>
+							<p style="text-align:justify">
+							los objetos originalmente lejos de la cámara, terminan teniendo entre sí menores diferencias en los
+   							valores en z que los que estaban cerca.
+							</p>
+						</li>
+						<li>
+							<p style="text-align:justify">
+							La información en profundidad pierde precisión rápidamente, esto puede originar artefactos para
+							objetos distantes.
+							</p>
+						</li>
+						<li>
+							<p style="text-align:justify">
+							No se pueden renderizar transparencias directamente.
+							</p>
+						</li>
+						<li>
+							<p style="text-align:justify">
+							No se puede aplicar tratamientos de anti-aliasing directamente.
+							</p>
+						</li>						
+						<li>
+							<p style="text-align:justify">
+							requiere conocer todos los polígonos involucrados en un determinado pixel.
+							</p>
+						</li>						
+					</ul>
+
+				<p style="text-align:justify">
+					<h1>Ejemplos:</h1>
+					<center>												
+					<img src="assets/img/ejemplo1.png" alt="ejemplo1">														
+						<caption>						
+							<br/><br/>
+							<p>Figura 6: Ejemplo 1</p>
+						</caption>
+					</center>
+					<center>												
+					<img width="68%" heigh="68%" src="assets/img/ejemplo2.png" alt="ejemplo1">														
+						<caption>						
+							<br/><br/>	
+							<p>Figura 7: Ejemplo 2</p>
+						</caption>
+					</center>
+				</p>
+				<h1>Bibliografia</h1>	
+				<ul>
+					<li>
+						<p style="text-align:justify">
+						http://omicrono.elespanol.com/2016/09/cuanta-memoria-debe-tener-una-grafica/
+						</p>
+					</li>
+					<li>
+						<p style="text-align:justify">
+						http://slideplayer.es/slide/4009190/
+						</p>
+					</li>
+				</ul>
+
+
+			</div><!-- /row -->
+	    </div> <!-- /container -->	
+	
+
+	<!-- +++++ Footer Section +++++ -->
+	
+	<div id="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4">
+					<h4>My Mail</h4>
+					<p>eabohorquezg@unal.edu.co</p>
+				</div><!-- /col-lg-4 -->								
+				
+				<div class="col-lg-4">
+					<h4>Page</h4>
+					<p> &copy; 2017 Edwin Bohorquez &middot; Design based on <a href="https://www.themezy.com/free-website-templates/171-stanley-freelancer-responsive-website-template" target="_blank" >Stanley Freelancer theme</a></p>
+				</div><!-- /col-lg-4 -->			
+			</div>		
+		</div>
+	</div>
+	
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="assets/js/bootstrap.min.js"></script>
+  </body>
+</html>
